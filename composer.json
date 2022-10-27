@@ -1,0 +1,31 @@
+{
+	"name": "petrsochan/smsmanager",
+	"type": "library",
+	"description": "Send and receive SMS",
+	"keywords": ["sms","smsmanager"],
+	"homepage": "https://github.com/petrsochan/smsmanager",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Petr Sochan",
+			"email": "petr.sochan@gmail.com",
+			"homepage": "https://github.com/petrsochan/smsmanager"
+		}
+	],
+	"require": {
+		"php": ">=5.5.0"
+	},
+	"require-dev": {
+		"php-parallel-lint/php-parallel-lint": "@stable",
+		"phpunit/phpunit": "^9.5",
+		"phpstan/phpstan": "^1.8",
+		"squizlabs/php_codesniffer": "*"
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"autoload": {
+		"classmap": [
+			"src/"
+		]
+	}
+}
