@@ -5,6 +5,8 @@ namespace Pes\SmsManager;
 
 class SendResponse
 {
+    const RESULT_OK = "OK";
+    const RESULT_ERR = "ERR";
 
     private $result;
 
@@ -15,6 +17,18 @@ class SendResponse
     private $customid;
 
     private $errorid;
+
+    protected $errorCode = [
+        '101' => 'Neexistující data požadavku (chybí XMLDATA parametr u XML API)',
+        '102' => 'Zaslaná data nejsou ve správném formátu',
+        '103' => 'Neplatné uživatelské jméno nebo heslo',
+        '104' => 'Neplatný parametr gateway',
+        '105' => 'Nedostatek kreditu pro prepaid',
+        '109' => 'Žádná platná telefonní čísla v požadavku',
+        '201' => 'Text zprávy neexistuje nebo je příliš dlouhý',
+        '202' => 'Neplatný parametr sender (odesílatele nejprve nastavte ve webovém rozhraní)',
+        '203' => 'Systémová chyba (informujte se na support@smsmanager.cz)',
+    ];
 
     public function __construct($str) {
         $arr = explode('|', $str);
@@ -127,5 +141,10 @@ class SendResponse
         $this->errorid = $errorid;
 
         return $this;
+    }
+
+    public function getErrorMessage()
+    {
+        return $this->errorCode[$this->errorid];
     }
 }

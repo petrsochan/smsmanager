@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Pes\SmsManager;
 
 use Pes\SmsManager\Exception\InvalidArgumentException;
+use Pes\SmsManager\Exception\InvalidStateException;
 
 class SmsManager
 {
@@ -61,7 +62,8 @@ class SmsManager
 			$request = new SendRequest($request, $number, $gateway, $sender, $customid, $time, $expiration);
 		}
 		$url = self::API_URL . '/' . self::ACTION_SEND . '?apikey=' . $this->apikey . '&' . $request->toUrl();
-		return new SendResponse($this->getRequest($url));
+		$response = $this->getRequest($url);
+		$this->processResponse($response);
 	}
 
 	/**
@@ -102,5 +104,12 @@ class SmsManager
 	{
 		$response = $this->makeRequest($url, $method, $data);
 		return new SendResponse($response);
+	}
+
+	protected function processResponse(SendResponse $response)
+	{
+		if ($response->getResult() != SendResponse::RESULT_OK) {
+			throw new InvalidStateException($response->getErrorMessage());
+		}
 	}
 }
