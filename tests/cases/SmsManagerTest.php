@@ -1,8 +1,8 @@
 <?php
 
-namespace PeS\SmsManager;
+namespace Pes\SmsManager;
 
-use PeS\SmsManager\SmsManager;
+use Pes\SmsManager\SmsManager;
 use PHPUnit\Framework\TestCase;
 
 final class SmsManagerTest extends TestCase

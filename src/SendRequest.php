@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace PeS\SmsManager;
+namespace Pes\SmsManager;
 
-class SendRequest {
-
+class SendRequest
+{
     const PRIORITY_HIGH = 'high';
 	const PRIORITY_ECONOMY = 'economy';
 	const PRIORITY_LOWCOST = 'lowcost';

@@ -1,8 +1,8 @@
 <?php
 
-namespace PeS\SmsManager;
+namespace Pes\SmsManager;
 
-use PeS\SmsManager\SendRequest;
+use Pes\SmsManager\SendRequest;
 use PHPUnit\Framework\TestCase;
 
 final class SendRequestTest extends TestCase

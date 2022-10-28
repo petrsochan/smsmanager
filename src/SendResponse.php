@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace PeS\SmsManager;
+namespace Pes\SmsManager;
 
-class SendResponse {
+class SendResponse
+{
 
     private $result;
 
