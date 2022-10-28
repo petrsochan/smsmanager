@@ -180,7 +180,11 @@ class SendRequest
         $url = [];
         foreach (['number', 'message', 'gateway', 'sender', 'customid', 'time', 'expiration'] as $key) {
             if (!empty($this->$key)) {
-                $url[] = $key . '=' . urlencode($this->$key);
+                if ($key == 'number' && is_array($this->$key)) {
+                    $url[] = $key . '=' . urlencode(join(',', $this->$key));
+                } else {
+                    $url[] = $key . '=' . urlencode($this->$key);
+                }
             }
         }
         return implode('&', $url);
