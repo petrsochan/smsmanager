@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Pes\SmsManager;
 
+use Pes\SmsManager\Exception\InvalidArgumentException;
+
 class SmsManager
 {
 	/** @var string */

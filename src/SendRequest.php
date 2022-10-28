@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace Pes\SmsManager;
 
+use Pes\SmsManager\Exception\InvalidArgumentException;
+use Pes\SmsManager\Exception\InvalidNumberException;
+
 class SendRequest
 {
     const PRIORITY_HIGH = 'high';
