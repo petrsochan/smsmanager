@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace PeS\SmsManager;
 
 class SendRequest {
@@ -87,7 +89,7 @@ class SendRequest {
     }
 
     public function isValidPhone($number) :bool {
-        return preg_match('/(\\+|00){0,1}\\d{12}|\\d{9}/', $number);
+        return boolval(preg_match('/(\\+|00){0,1}\\d{12}|\\d{9}/', $number));
     }
 
     public function getNumber() {

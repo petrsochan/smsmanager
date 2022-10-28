@@ -13,7 +13,7 @@
 		}
 	],
 	"require": {
-		"php": ">=5.5.0"
+		"php": ">=7.4.0"
 	},
 	"require-dev": {
 		"php-parallel-lint/php-parallel-lint": "@stable",
@@ -24,8 +24,8 @@
 	"minimum-stability": "dev",
 	"prefer-stable": true,
 	"autoload": {
-		"classmap": [
-			"src/"
-		]
+        "psr-4": {
+            "PeS\\SmsManager\\": "src/"
+        }
 	}
 }
