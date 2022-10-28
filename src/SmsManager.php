@@ -17,6 +17,7 @@ class SmsManager
 	const API_URL = 'https://http-api.smsmanager.cz';
 	const USER_AGENT = 'SmsManager PHP';
 	const ACTION_SEND = 'Send';
+	const ACTION_GET_USER_INFO = 'GetUserInfo';
 
 	/**
 	 * @param string $apikey
@@ -51,6 +52,12 @@ class SmsManager
         return $this;
     }
 
+	public function getUserInfo()
+	{
+		$url = self::API_URL . '/' . self::ACTION_GET_USER_INFO . '?apikey=' . $this->apikey;
+		return new GetUserInfoResponse($this->getRequest($url));
+	}
+
 	/**
 	 * @param SendRequest|String $request
 	 * @return SendResponse $response
@@ -62,8 +69,11 @@ class SmsManager
 			$request = new SendRequest($request, $number, $gateway, $sender, $customid, $time, $expiration);
 		}
 		$url = self::API_URL . '/' . self::ACTION_SEND . '?apikey=' . $this->apikey . '&' . $request->toUrl();
-		$response = $this->getRequest($url);
-		$this->processResponse($response);
+		$response = new SendResponse($this->getRequest($url));
+		if ($response->getResult() != SendResponse::RESULT_OK) {
+			throw new InvalidStateException($response->getErrorMessage());
+		}
+		return $response;
 	}
 
 	/**
@@ -102,14 +112,6 @@ class SmsManager
 	 */
 	protected function getRequest($url, $method = 'GET', $data = NULL)
 	{
-		$response = $this->makeRequest($url, $method, $data);
-		return new SendResponse($response);
-	}
-
-	protected function processResponse(SendResponse $response)
-	{
-		if ($response->getResult() != SendResponse::RESULT_OK) {
-			throw new InvalidStateException($response->getErrorMessage());
-		}
+		return $this->makeRequest($url, $method, $data);
 	}
 }

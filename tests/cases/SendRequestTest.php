@@ -17,7 +17,6 @@ final class SendRequestTest extends TestCase
         $this->assertTrue($request->isValidPhone('+420123456789'));
         $this->assertTrue($request->isValidPhone('00420123456789'));
         $this->assertTrue($request->isValidPhone('123456789'));
-        //$this->assertNotNull($request->validate());       
 	}
 
     /**
@@ -45,7 +44,7 @@ final class SendRequestTest extends TestCase
     {
         return [
             [SendRequest::PRIORITY_HIGH, SendRequest::PRIORITY_HIGH],
-            [SendRequest::PRIORITY_LOWCOST, null],
+            [SendRequest::PRIORITY_DEFAULT, null],
         ];
     }
 

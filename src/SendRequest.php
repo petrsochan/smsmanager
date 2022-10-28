@@ -8,10 +8,13 @@ use Pes\SmsManager\Exception\InvalidNumberException;
 
 class SendRequest
 {
+    const DATETIME_FORMAT = '/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$/';
+    const PHONE_FORMAT = '/(\\+|00){0,1}\\d{12}|\\d{9}/';
     const PRIORITY_HIGH = 'high';
 	const PRIORITY_ECONOMY = 'economy';
 	const PRIORITY_LOWCOST = 'lowcost';
 	const PRIORITY_DIRECT = 'direct';
+    const PRIORITY_DEFAULT = SendRequest::PRIORITY_HIGH;
 
 	private $gateways = [self::PRIORITY_HIGH, self::PRIORITY_ECONOMY, self::PRIORITY_LOWCOST, self::PRIORITY_DIRECT];
 
@@ -22,7 +25,7 @@ class SendRequest
     private $message;
 
     /** @var string */
-    private $gateway = SendRequest::PRIORITY_LOWCOST;
+    private $gateway = self::PRIORITY_DEFAULT;
 
     /** @var string */
     private $sender;
@@ -82,17 +85,17 @@ class SendRequest
         if (!empty($this->customid) && strlen($this->customid) > 10) {
             throw new InvalidArgumentException('Customid maximul length is 10 characters');
         }
-        if (!empty($this->time) && preg_match('/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$/', $this->time)) {
+        if (!empty($this->time) && preg_match(self::DATETIME_FORMAT, $this->time)) {
             throw new InvalidArgumentException('Invalid time format. Valid is 2011-01-01T23:59:59');
         }
-        if (!empty($this->expiration) && preg_match('/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$/', $this->expiration)) {
+        if (!empty($this->expiration) && preg_match(self::DATETIME_FORMAT, $this->expiration)) {
             throw new InvalidArgumentException('Invalid expiration format. Valid is 2011-01-01T23:59:59');
         }
         return $this;
     }
 
     public function isValidPhone($number) :bool {
-        return boolval(preg_match('/(\\+|00){0,1}\\d{12}|\\d{9}/', $number));
+        return boolval(preg_match(self::PHONE_FORMAT, $number));
     }
 
     public function getNumber() {
@@ -133,7 +136,10 @@ class SendRequest
     }
 
     public function setGateway($gateway) {
-        if (in_array($gateway, $this->gateways)) {
+        if ($gateway != null) {
+            if (!in_array($gateway, $this->gateways)) {
+                throw new InvalidArgumentException('Invalid priority ' . $gateway);
+            }
             $this->gateway = $gateway;
         }
         return $this;

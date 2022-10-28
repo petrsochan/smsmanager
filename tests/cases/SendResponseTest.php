@@ -7,18 +7,6 @@ use PHPUnit\Framework\TestCase;
 
 final class SendResponseTest extends TestCase
 {
-    public function testClassConstructor()
-	{
-		$request = new SendRequest('message', '123456789', SendRequest::PRIORITY_DIRECT);
-		$this->assertSame(['123456789'], $request->getNumber());
-		$this->assertSame('message', $request->getMessage());
-		$this->assertSame(SendRequest::PRIORITY_DIRECT, $request->getGateway());
-        $this->assertFalse($request->isValidPhone('telefonnicislo'));
-        $this->assertTrue($request->isValidPhone('+420123456789'));
-        $this->assertTrue($request->isValidPhone('00420123456789'));
-        $this->assertTrue($request->isValidPhone('123456789'));
-	}
-
     /**
      * @dataProvider dataProviderConstruct
      */
