@@ -12,7 +12,7 @@ class GetUserInfoResponse
     private $gateway;
 
     public function __construct($str) {
-        $arr = explode('|', $str);
+        $arr = explode('|', trim($str));
         $this->credit = $arr[0];
         $this->sender = $arr[1];
         $this->gateway = $arr[2];

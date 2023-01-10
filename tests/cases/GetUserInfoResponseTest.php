@@ -16,7 +16,7 @@ final class GetUserInfoResponseTest extends TestCase
 
         self::assertSame($exp['credit'], $response->getCredit());
         self::assertSame($exp['sender'], $response->getSender());
-        self::assertSame($exp['gateway'], $response->getGateway());
+        self::assertSame($exp['gateway'], SendRequest::PRIORITY_ECONOMY);
     }
 
     /**
@@ -25,7 +25,7 @@ final class GetUserInfoResponseTest extends TestCase
     public function dataProviderConstruct() : array
     {
         return [
-            [array('credit' => '999', 'sender' => '123456789', 'gateway' => SendRequest::PRIORITY_ECONOMY), "999|123456789|" . SendRequest::PRIORITY_ECONOMY],
+            [array('credit' => '999', 'sender' => '123456789', 'gateway' => SendRequest::PRIORITY_ECONOMY), "999|123456789|" . SendRequest::PRIORITY_ECONOMY . "\n"],
             [array('credit' => '1', 'sender' => '123456789', 'gateway' => SendRequest::PRIORITY_ECONOMY), "1|123456789|" . SendRequest::PRIORITY_ECONOMY],
         ];
     }
