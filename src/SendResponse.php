@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Pes\SmsManager;
@@ -30,7 +31,8 @@ class SendResponse
         '203' => 'Systémová chyba (informujte se na support@smsmanager.cz)',
     ];
 
-    public function __construct($str) {
+    public function __construct($str)
+    {
         $arr = explode('|', $str);
         $this->result = $arr[0];
         if (strtolower($arr[0]) == 'ok') {
@@ -46,7 +48,7 @@ class SendResponse
 
     /**
      * Get the value of result
-     */ 
+     */
     public function getResult()
     {
         return $this->result;
@@ -56,7 +58,7 @@ class SendResponse
      * Set the value of result
      *
      * @return  self
-     */ 
+     */
     public function setResult($result)
     {
         $this->result = $result;
@@ -65,7 +67,7 @@ class SendResponse
 
     /**
      * Get the value of requestid
-     */ 
+     */
     public function getRequestid()
     {
         return $this->requestid;
@@ -75,7 +77,7 @@ class SendResponse
      * Set the value of requestid
      *
      * @return  self
-     */ 
+     */
     public function setRequestid($requestid)
     {
         $this->requestid = $requestid;
@@ -85,7 +87,7 @@ class SendResponse
 
     /**
      * Get the value of phone
-     */ 
+     */
     public function getPhone()
     {
         return $this->phone;
@@ -95,7 +97,7 @@ class SendResponse
      * Set the value of phone
      *
      * @return  self
-     */ 
+     */
     public function setPhone($phone)
     {
         $this->phone = $phone;
@@ -105,7 +107,7 @@ class SendResponse
 
     /**
      * Get the value of customid
-     */ 
+     */
     public function getCustomid()
     {
         return $this->customid;
@@ -115,7 +117,7 @@ class SendResponse
      * Set the value of customid
      *
      * @return  self
-     */ 
+     */
     public function setCustomid($customid)
     {
         $this->customid = $customid;
@@ -125,7 +127,7 @@ class SendResponse
 
     /**
      * Get the value of errorid
-     */ 
+     */
     public function getErrorid()
     {
         return $this->errorid;
@@ -135,7 +137,7 @@ class SendResponse
      * Set the value of errorid
      *
      * @return  self
-     */ 
+     */
     public function setErrorid($errorid)
     {
         $this->errorid = $errorid;

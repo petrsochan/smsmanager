@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Pes\SmsManager;
@@ -11,12 +12,12 @@ class SendRequest
     const DATETIME_FORMAT = '/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$/';
     const PHONE_FORMAT = '/(\\+|00){0,1}\\d{12}|\\d{9}/';
     const PRIORITY_HIGH = 'high';
-	const PRIORITY_ECONOMY = 'economy';
-	const PRIORITY_LOWCOST = 'lowcost';
-	const PRIORITY_DIRECT = 'direct';
+    const PRIORITY_ECONOMY = 'economy';
+    const PRIORITY_LOWCOST = 'lowcost';
+    const PRIORITY_DIRECT = 'direct';
     const PRIORITY_DEFAULT = SendRequest::PRIORITY_HIGH;
 
-	private $gateways = [self::PRIORITY_HIGH, self::PRIORITY_ECONOMY, self::PRIORITY_LOWCOST, self::PRIORITY_DIRECT];
+    private $gateways = [self::PRIORITY_HIGH, self::PRIORITY_ECONOMY, self::PRIORITY_LOWCOST, self::PRIORITY_DIRECT];
 
     /** @var array */
     private $number;
@@ -39,9 +40,15 @@ class SendRequest
     /** @var string */
     private $expiration;
 
-    public function __construct($message, $number = null, $gateway = null, 
-        $sender = null, $customid = null, $time = null, $expiration = null)
-    {
+    public function __construct(
+        $message,
+        $number = null,
+        $gateway = null,
+        $sender = null,
+        $customid = null,
+        $time = null,
+        $expiration = null
+    ) {
         if (is_array($message)) {
             foreach ($message as $k => $v) {
                 $this->$k = $v;
@@ -94,15 +101,18 @@ class SendRequest
         return $this;
     }
 
-    public function isValidPhone($number) :bool {
+    public function isValidPhone($number): bool
+    {
         return boolval(preg_match(self::PHONE_FORMAT, $number));
     }
 
-    public function getNumber() {
+    public function getNumber()
+    {
         return $this->number;
     }
 
-    public function setNumber($number) {
+    public function setNumber($number)
+    {
         if (is_array($number)) {
             foreach ($number as $k => $v) {
                 $v = trim($v);
@@ -122,20 +132,24 @@ class SendRequest
         return $this;
     }
 
-    public function getMessage() {
+    public function getMessage()
+    {
         return $this->message;
     }
 
-    public function setMessage($message) {
+    public function setMessage($message)
+    {
         $this->message = $message;
         return $this;
     }
 
-    public function getGateway() {
+    public function getGateway()
+    {
         return $this->gateway;
     }
 
-    public function setGateway($gateway) {
+    public function setGateway($gateway)
+    {
         if ($gateway != null) {
             if (!in_array($gateway, $this->gateways)) {
                 throw new InvalidArgumentException('Invalid priority ' . $gateway);
@@ -145,38 +159,46 @@ class SendRequest
         return $this;
     }
 
-    public function getSender() {
+    public function getSender()
+    {
         return $this->sender;
     }
 
-    public function setSender($sender) {
+    public function setSender($sender)
+    {
         $this->sender = $sender;
         return $this;
     }
 
-    public function getCustomid() {
+    public function getCustomid()
+    {
         return $this->customid;
     }
 
-    public function setCustomid($customid) {
+    public function setCustomid($customid)
+    {
         $this->customid = $customid;
         return $this;
     }
 
-    public function getTime() {
+    public function getTime()
+    {
         return $this->time;
     }
 
-    public function setTime($time) {
+    public function setTime($time)
+    {
         $this->time = $time;
         return $this;
     }
 
-    public function getExpiration() {
+    public function getExpiration()
+    {
         return $this->expiration;
     }
 
-    public function setExpiration($expiration) {
+    public function setExpiration($expiration)
+    {
         $this->expiration = $expiration;
         return $this;
     }

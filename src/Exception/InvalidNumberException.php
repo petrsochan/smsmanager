@@ -1,8 +1,7 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Pes\SmsManager\Exception;
 
-class InvalidNumberException extends \InvalidArgumentException
-{
-}
+class InvalidNumberException extends \InvalidArgumentException {}
